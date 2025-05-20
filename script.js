@@ -14,18 +14,22 @@
 // 	}
 // }
 
-async function getWeather(){
+async function getWeather() {
 	const apiKey = "3581693e48907eebbe85c175f0aa3453";
 	const city = "London";
-	const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+	const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
 	try {
 		const response = await fetch(url);
-		if (!response.ok) throw new Error('failed to fetch weather data');
+		if (!response.ok) throw new Error('Failed to fetch weather data');
 		const data = await response.json();
 		const condition = data.weather[0].main;
-		document.getElementById("weatherData").innerText = `Current weather in London: ${condition}`;
+		document.getElementById("weatherData").innerText =
+			`Current weather in ${city}: ${condition}`;
 	} catch (error) {
-		document.getElementById("weatherData").innerText = `Error in fetching data`;
+		document.getElementById("weatherData").innerText =
+			`Error fetching data`;
 		console.log(error);
 	}
 }
+
